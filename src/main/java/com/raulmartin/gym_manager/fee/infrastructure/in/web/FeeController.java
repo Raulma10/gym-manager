@@ -5,7 +5,9 @@ import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,10 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.raulmartin.gym_manager.fee.domain.model.Fee;
+import com.raulmartin.gym_manager.fee.domain.port.in.ChangeStatusUseCase;
 import com.raulmartin.gym_manager.fee.domain.port.in.CreateFeeUseCase;
+import com.raulmartin.gym_manager.fee.domain.port.in.DeleteFeeUseCase;
 import com.raulmartin.gym_manager.fee.domain.port.in.FindFeeByIdUseCase;
 import com.raulmartin.gym_manager.fee.domain.port.in.ListFeesUseCase;
+import com.raulmartin.gym_manager.fee.domain.port.in.UpdateFeeUseCase;
 import com.raulmartin.gym_manager.fee.infrastructure.in.web.dto.CreateFeeRequest;
+import com.raulmartin.gym_manager.fee.infrastructure.in.web.dto.FeeResponse;
+import com.raulmartin.gym_manager.fee.infrastructure.in.web.dto.UpdateFeeRequest;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -25,12 +32,19 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/fees") 
 @RequiredArgsConstructor 
 public class FeeController {
+
+    private final FeeMapper feeMapper;
+
     private final CreateFeeUseCase createFeeUseCase;
     private final ListFeesUseCase listFeesUseCase;
     private final FindFeeByIdUseCase findFeeByIdUseCase;
+    private final UpdateFeeUseCase updateFeeUseCase;
+    private final ChangeStatusUseCase changeStatusUseCase;
+    private final DeleteFeeUseCase deleteFeeUseCase;
 
     @PostMapping
-    public ResponseEntity<Fee> createFee(@Valid @RequestBody CreateFeeRequest createFeeRequest){
+    public ResponseEntity<FeeResponse> createFee(@Valid @RequestBody CreateFeeRequest createFeeRequest){
+       
         Fee fee = createFeeUseCase.createFee(
             createFeeRequest.name(),
             createFeeRequest.price(),
@@ -39,18 +53,60 @@ public class FeeController {
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(fee);
+                .body(feeMapper.toResponse(fee));
     }
 
     @GetMapping
-    public ResponseEntity<List<Fee>> listFees(){
-        return ResponseEntity.ok(listFeesUseCase.listAll());
+    public ResponseEntity<List<FeeResponse>> listFees(){
+        
+        List<FeeResponse> fees = listFeesUseCase.listAll()
+            .stream()
+            .map(feeMapper::toResponse)
+            .toList();
+        
+            return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(fees);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Fee> findFeeById(@PathVariable UUID id){
+    public ResponseEntity<FeeResponse> findFeeById(@PathVariable UUID id){
         return findFeeByIdUseCase.findById(id)
+                .map(feeMapper::toResponse)
                 .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+                .orElseGet(() -> ResponseEntity
+                                    .status(HttpStatus.NOT_FOUND)
+                                    .build());
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<FeeResponse> updateFee(@PathVariable UUID id, @Valid @RequestBody UpdateFeeRequest request) {
+        Fee fee = updateFeeUseCase.updateFee(
+                id,
+                request.name(),
+                request.price(),
+                request.weeklySessions()
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(feeMapper.toResponse(fee));
+        
+    }
+
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<FeeResponse> updateFeeStatus(@PathVariable UUID id){
+        Fee fee = changeStatusUseCase.changeFeeStatus(id);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(feeMapper.toResponse(fee));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteFee(@PathVariable UUID id) {
+        deleteFeeUseCase.deleteFee(id);
+        return ResponseEntity
+            .status(HttpStatus.OK)
+            .build();
     }
 }

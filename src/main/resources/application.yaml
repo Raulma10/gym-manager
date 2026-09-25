@@ -1,27 +1,35 @@
-server.port=8080
+server:
+  port: 8080
 
-spring.application.name=gym-manager
+spring:
+  application:
+    name: gym-manager
+  datasource:
+    url: jdbc:postgresql://localhost:5432/gym_manager
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:1234}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
 
-# Datasource
-spring.datasource.url=jdbc:postgresql://localhost:5432/gym_manager
-spring.datasource.username=${DB_USERNAME}
-spring.datasource.password=${DB_PASSWORD}
-spring.datasource.driver-class-name=org.postgresql.Driver
+app:
+  jwt:
+    secret: ${JWT_SECRET:cambia-este-valor-por-un-secreto-largo-y-seguro}
+    expiration-ms: 86400000
 
-# JPA
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.format_sql=true
-spring.jpa.open-in-view=false
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
 
-# JWT (configuracion propia)
-app.jwt.secret=${JWT_SECRET}
-app.jwt.expiration-ms=86400000
-
-# Swagger / OpenAPI
-springdoc.swagger-ui.path=/swagger-ui.html
-springdoc.api-docs.path=/v3/api-docs
-
-# Logging
-logging.level.com.raulmartin.gymmanager=DEBUG
-logging.level.org.hibernate.SQL=DEBUG
+logging:
+  level:
+    com.raulmartin.gym_manager: DEBUG
+    org.hibernate.SQL: DEBUG
