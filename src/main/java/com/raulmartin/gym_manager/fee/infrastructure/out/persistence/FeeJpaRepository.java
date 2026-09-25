@@ -1,0 +1,9 @@
+package com.raulmartin.gym_manager.fee.infrastructure.out.persistence;
+
+import java.util.UUID;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface FeeJpaRepository extends JpaRepository<FeeJpaEntity,UUID>{
+    
+}
