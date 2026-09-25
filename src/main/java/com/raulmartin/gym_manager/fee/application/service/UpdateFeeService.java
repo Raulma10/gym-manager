@@ -18,9 +18,30 @@ public class UpdateFeeService implements UpdateFeeUseCase{
     private final FeeRepositoryPort feeRepositoryPort;
 
     @Override
-    public Fee updateFee(UUID id, String name, BigDecimal price, int weeklySessions) {
+    public Fee updateFee(UUID id, String name, BigDecimal price, Integer weeklySessions) {
         Fee fee = feeRepositoryPort.findById(id).orElseThrow(() -> new IllegalArgumentException("No se ha encontrado la cuota"));
-        Fee updatedFee = fee.update(name, price, weeklySessions);
+        String newName = fee.getName();
+        BigDecimal newPrice = fee.getPrice();
+        int newWeeklySessions = fee.getWeeklySessions();
+
+        if (name != null) {
+            newName = name;
+        }
+
+        if (price != null) {
+            newPrice = price;
+        }
+
+        if (weeklySessions != null) {
+            newWeeklySessions = weeklySessions;
+        }
+
+        Fee updatedFee = fee.update(
+                newName,
+                newPrice,
+                newWeeklySessions
+        );
+
         return feeRepositoryPort.save(updatedFee);
     }
     

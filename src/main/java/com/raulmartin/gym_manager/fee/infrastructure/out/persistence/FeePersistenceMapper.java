@@ -4,11 +4,10 @@ import org.mapstruct.Mapper;
 
 import com.raulmartin.gym_manager.fee.domain.model.Fee;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = FeeStatusPersistenceMapper.class)
 public interface FeePersistenceMapper {
 
     FeeJpaEntity toEntity(Fee fee);
 
     Fee toDomain(FeeJpaEntity entity);
-    
 }

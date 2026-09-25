@@ -30,7 +30,6 @@ import lombok.Setter;
 public class FeeJpaEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
  
     @NotNull
