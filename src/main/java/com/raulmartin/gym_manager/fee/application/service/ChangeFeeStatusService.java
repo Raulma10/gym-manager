@@ -5,14 +5,14 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import com.raulmartin.gym_manager.fee.domain.model.Fee;
-import com.raulmartin.gym_manager.fee.domain.port.in.ChangeStatusUseCase;
+import com.raulmartin.gym_manager.fee.domain.port.in.ChangeFeeStatusUseCase;
 import com.raulmartin.gym_manager.fee.domain.port.out.FeeRepositoryPort;
 
 import lombok.RequiredArgsConstructor;
 
 @Service 
 @RequiredArgsConstructor 
-public class ChangeStatusService implements ChangeStatusUseCase{
+public class ChangeFeeStatusService implements ChangeFeeStatusUseCase{
 
     private final FeeRepositoryPort feeRepositoryPort;
 

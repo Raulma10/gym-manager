@@ -4,6 +4,6 @@ import java.util.UUID;
 
 import com.raulmartin.gym_manager.fee.domain.model.Fee;
 
-public interface ChangeStatusUseCase {
+public interface ChangeFeeStatusUseCase {
     Fee changeFeeStatus(UUID id);
 }

@@ -21,11 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.raulmartin.gym_manager.fee.domain.model.Fee;
 import com.raulmartin.gym_manager.fee.domain.model.FeeStatus;
-import com.raulmartin.gym_manager.fee.domain.port.in.ChangeStatusUseCase;
+import com.raulmartin.gym_manager.fee.domain.port.in.ChangeFeeStatusUseCase;
 import com.raulmartin.gym_manager.fee.domain.port.in.CreateFeeUseCase;
 import com.raulmartin.gym_manager.fee.domain.port.in.DeleteFeeUseCase;
 import com.raulmartin.gym_manager.fee.domain.port.in.FindFeeByIdUseCase;
-import com.raulmartin.gym_manager.fee.domain.port.in.FindFeesUseCase;
+import com.raulmartin.gym_manager.fee.domain.port.in.SearchFeesUseCase;
 import com.raulmartin.gym_manager.fee.domain.port.in.ListFeesUseCase;
 import com.raulmartin.gym_manager.fee.domain.port.in.UpdateFeeUseCase;
 import com.raulmartin.gym_manager.fee.infrastructure.in.web.dto.CreateFeeRequest;
@@ -45,9 +45,9 @@ public class FeeController {
     private final CreateFeeUseCase createFeeUseCase;
     private final ListFeesUseCase listFeesUseCase;
     private final FindFeeByIdUseCase findFeeByIdUseCase;
-    private final FindFeesUseCase findFeesUseCase;
+    private final SearchFeesUseCase findFeesUseCase;
     private final UpdateFeeUseCase updateFeeUseCase;
-    private final ChangeStatusUseCase changeStatusUseCase;
+    private final ChangeFeeStatusUseCase changeStatusUseCase;
     private final DeleteFeeUseCase deleteFeeUseCase;
 
     @PostMapping

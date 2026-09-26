@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 
 @Component 
 @RequiredArgsConstructor 
-public class FeeRepositoryAdapter implements FeeRepositoryPort{
+public class FeePersistenceAdapter implements FeeRepositoryPort{
 
     private final FeeJpaRepository feeJpaRepository;
     private final FeePersistenceMapper feePersistenceMapper;

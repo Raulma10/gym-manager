@@ -8,6 +8,6 @@ import org.springframework.data.domain.Pageable;
 import com.raulmartin.gym_manager.fee.domain.model.Fee;
 import com.raulmartin.gym_manager.fee.domain.model.FeeStatus;
 
-public interface FindFeesUseCase {
+public interface SearchFeesUseCase {
     Page<Fee> searchFee(String name, BigDecimal price, Integer weeklySessions, FeeStatus status, Pageable pageable);
 }

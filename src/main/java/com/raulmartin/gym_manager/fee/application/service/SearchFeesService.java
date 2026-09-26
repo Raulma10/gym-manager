@@ -8,14 +8,14 @@ import org.springframework.stereotype.Service;
 
 import com.raulmartin.gym_manager.fee.domain.model.Fee;
 import com.raulmartin.gym_manager.fee.domain.model.FeeStatus;
-import com.raulmartin.gym_manager.fee.domain.port.in.FindFeesUseCase;
+import com.raulmartin.gym_manager.fee.domain.port.in.SearchFeesUseCase;
 import com.raulmartin.gym_manager.fee.domain.port.out.FeeRepositoryPort;
 
 import lombok.RequiredArgsConstructor;
 
 @Service 
 @RequiredArgsConstructor 
-public class FindFeesService implements FindFeesUseCase{
+public class SearchFeesService implements SearchFeesUseCase{
 
     private final FeeRepositoryPort feeRepositoryPort;
 
