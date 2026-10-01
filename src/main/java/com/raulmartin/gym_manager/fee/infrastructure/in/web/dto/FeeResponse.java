@@ -11,5 +11,4 @@ public record FeeResponse(
         BigDecimal price,
         int weeklySessions,
         FeeStatus feeStatus
-) {
-}
+) {}
