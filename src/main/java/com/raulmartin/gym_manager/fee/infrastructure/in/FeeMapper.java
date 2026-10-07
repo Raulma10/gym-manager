@@ -1,4 +1,4 @@
-package com.raulmartin.gym_manager.fee.infrastructure.in.web;
+package com.raulmartin.gym_manager.fee.infrastructure.in;
 
 import org.mapstruct.Mapper;
 

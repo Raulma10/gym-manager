@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.raulmartin.gym_manager.fee.domain.model.Fee;
-import com.raulmartin.gym_manager.fee.infrastructure.in.web.FeeMapper;
 import com.raulmartin.gym_manager.member.domain.model.Member;
 import com.raulmartin.gym_manager.member.domain.model.MemberStatus;
 import com.raulmartin.gym_manager.member.domain.port.in.ChangeMemberStatusUseCase;

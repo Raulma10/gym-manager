@@ -12,10 +12,12 @@ import org.springframework.stereotype.Component;
 import com.raulmartin.gym_manager.fee.domain.model.Fee;
 import com.raulmartin.gym_manager.fee.infrastructure.out.persistence.FeeJpaEntity;
 import com.raulmartin.gym_manager.fee.infrastructure.out.persistence.FeeJpaRepository;
-import com.raulmartin.gym_manager.fee.infrastructure.out.persistence.FeePersistenceMapper;
+import com.raulmartin.gym_manager.fee.infrastructure.out.persistence.mapper.FeePersistenceMapper;
 import com.raulmartin.gym_manager.member.domain.model.Member;
 import com.raulmartin.gym_manager.member.domain.model.MemberStatus;
 import com.raulmartin.gym_manager.member.domain.port.out.MemberRepositoryPort;
+import com.raulmartin.gym_manager.member.infrastructure.out.persistence.mapper.MemberPersistenceMapper;
+import com.raulmartin.gym_manager.member.infrastructure.out.persistence.mapper.MemberStatusPersistenceMapper;
 
 import lombok.RequiredArgsConstructor;
 

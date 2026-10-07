@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import com.raulmartin.gym_manager.fee.domain.model.Fee;
 import com.raulmartin.gym_manager.member.domain.model.Member;
 import com.raulmartin.gym_manager.member.domain.port.in.CreateMemberUseCase;
 import com.raulmartin.gym_manager.member.domain.port.out.MemberRepositoryPort;

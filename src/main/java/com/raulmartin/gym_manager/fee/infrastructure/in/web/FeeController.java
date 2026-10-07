@@ -28,6 +28,7 @@ import com.raulmartin.gym_manager.fee.domain.port.in.FindFeeByIdUseCase;
 import com.raulmartin.gym_manager.fee.domain.port.in.SearchFeesUseCase;
 import com.raulmartin.gym_manager.fee.domain.port.in.ListFeesUseCase;
 import com.raulmartin.gym_manager.fee.domain.port.in.UpdateFeeUseCase;
+import com.raulmartin.gym_manager.fee.infrastructure.in.FeeMapper;
 import com.raulmartin.gym_manager.fee.infrastructure.in.web.dto.CreateFeeRequest;
 import com.raulmartin.gym_manager.fee.infrastructure.in.web.dto.FeeResponse;
 import com.raulmartin.gym_manager.fee.infrastructure.in.web.dto.UpdateFeeRequest;

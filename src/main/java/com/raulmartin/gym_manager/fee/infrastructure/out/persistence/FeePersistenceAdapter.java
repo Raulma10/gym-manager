@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 import com.raulmartin.gym_manager.fee.domain.model.Fee;
 import com.raulmartin.gym_manager.fee.domain.model.FeeStatus;
 import com.raulmartin.gym_manager.fee.domain.port.out.FeeRepositoryPort;
+import com.raulmartin.gym_manager.fee.infrastructure.out.persistence.mapper.FeePersistenceMapper;
+import com.raulmartin.gym_manager.fee.infrastructure.out.persistence.mapper.FeeStatusPersistenceMapper;
 
 import lombok.RequiredArgsConstructor;
 

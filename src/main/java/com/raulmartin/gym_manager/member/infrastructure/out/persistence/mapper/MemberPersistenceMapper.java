@@ -1,9 +1,10 @@
-package com.raulmartin.gym_manager.member.infrastructure.out.persistence;
+package com.raulmartin.gym_manager.member.infrastructure.out.persistence.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 import com.raulmartin.gym_manager.member.domain.model.Member;
+import com.raulmartin.gym_manager.member.infrastructure.out.persistence.MemberJpaEntity;
 
 @Mapper(componentModel = "spring")
 public interface MemberPersistenceMapper {
