@@ -26,13 +26,13 @@ public class Exercise {
  
     private static void validate(String name, String description, MuscleGroup muscleGroup) {
         if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException("Exercise name is required");
+            throw new IllegalArgumentException("El nombre del ejercicio es obligatorio");
         }
         if (description == null || description.isBlank()) {
-            throw new IllegalArgumentException("Exercise description is required");
+            throw new IllegalArgumentException("La descripción del ejercicio es obligatoria");
         }
         if (muscleGroup == null) {
-            throw new IllegalArgumentException("Exercise muscle group is required");
+            throw new IllegalArgumentException("El grupo muscular es obligatorio");
         }
     }
 }

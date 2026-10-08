@@ -50,23 +50,23 @@ public class WorkoutExercise {
             int order) {
 
         if (exercise == null) {
-            throw new IllegalArgumentException("Exercise is required");
+            throw new IllegalArgumentException("El ejercicio es obligatorio");
         }
 
         if (sets <= 0) {
-            throw new IllegalArgumentException("Sets must be greater than 0");
+            throw new IllegalArgumentException("Las series deben ser mayores que 0");
         }
 
         if (reps <= 0) {
-            throw new IllegalArgumentException("Reps must be greater than 0");
+            throw new IllegalArgumentException("Las repeticiones deben ser mayores que 0");
         }
 
         if (restSeconds < 0) {
-            throw new IllegalArgumentException("Rest seconds cannot be negative");
+            throw new IllegalArgumentException("El descanso debe ser mayor que 0");
         }
 
         if (order < 0) {
-            throw new IllegalArgumentException("Order cannot be negative");
+            throw new IllegalArgumentException("El orden debe ser mayor a 0");
         }
     }
 }
