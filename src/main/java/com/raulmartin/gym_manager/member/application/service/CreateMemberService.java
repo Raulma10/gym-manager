@@ -18,8 +18,8 @@ public class CreateMemberService implements CreateMemberUseCase{
     private final MemberRepositoryPort memberRepositoryPort;
 
     @Override
-    public Member create(String name, String lastName, String mail, String phone, LocalDate birthDate, UUID feeId) {
-        Member member = Member.create(name, lastName, mail, phone, birthDate, feeId);
+    public Member create(String name, String lastName, String mail, String phone, LocalDate birthDate, UUID feeId, UUID workoutId) {
+        Member member = Member.create(name, lastName, mail, phone, birthDate, feeId, workoutId);
         return memberRepositoryPort.save(member);
     }
     

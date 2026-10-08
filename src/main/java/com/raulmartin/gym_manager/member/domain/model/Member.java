@@ -18,8 +18,9 @@ public class Member {
     private final LocalDate birthDate;
     private final UUID feeId;
     private final MemberStatus memberStatus;
+    private final UUID workoutId;
 
-    public static Member create(String name, String lastName, String mail, String phone, LocalDate birthDate, UUID feeId){
+    public static Member create(String name, String lastName, String mail, String phone, LocalDate birthDate, UUID feeId, UUID workoutId){
         if(name == null || name.isBlank()){
             throw new IllegalArgumentException("El nombre es obligatorio");
         }
@@ -41,12 +42,12 @@ public class Member {
         }
         
 
-        return new Member(UUID.randomUUID(), name, lastName, mail, phone, birthDate, feeId, MemberStatus.ACTIVE);
+        return new Member(UUID.randomUUID(), name, lastName, mail, phone, birthDate, feeId, MemberStatus.ACTIVE, workoutId);
     }
 
     public Member update(String name, String lastName, String mail, String phone, LocalDate birthDate){
-        Member updated = Member.create(name, lastName, mail, phone, birthDate, feeId);
-        return new Member(this.id, updated.name, updated.lastName, updated.mail, updated.phone, updated.birthDate, this.feeId, this.memberStatus);
+        Member updated = Member.create(name, lastName, mail, phone, birthDate, feeId, workoutId);
+        return new Member(this.id, updated.name, updated.lastName, updated.mail, updated.phone, updated.birthDate, this.feeId, this.memberStatus, this.workoutId);
     }
 
     public Member changeStatus(MemberStatus memberStatus){
@@ -59,6 +60,38 @@ public class Member {
         if (memberStatus.equals(MemberStatus.INACTIVE)){
             newStatus = MemberStatus.ACTIVE;
         }
-        return new Member(this.id, this.name, this.lastName, this.mail, this.phone, this.birthDate, this.feeId, newStatus);
+        return new Member(this.id, this.name, this.lastName, this.mail, this.phone, this.birthDate, this.feeId, newStatus, this.workoutId);
+    }
+
+    public Member assignWorkout(UUID workoutId) {
+        if (workoutId == null) {
+            throw new IllegalArgumentException("La tabla de entrenamiento es obligatoria");
+        }
+
+        return new Member(
+                this.id,
+                this.name,
+                this.lastName,
+                this.mail,
+                this.phone,
+                this.birthDate,
+                this.feeId,
+                this.memberStatus,
+                workoutId
+        );
+    }
+
+    public Member removeWorkout() {
+        return new Member(
+            this.id,
+            this.name,
+            this.lastName,
+            this.mail,
+            this.phone,
+            this.birthDate,
+            this.feeId,
+            this.memberStatus,
+            null
+        );
     }
 }

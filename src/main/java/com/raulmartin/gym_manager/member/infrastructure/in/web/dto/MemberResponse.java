@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import com.raulmartin.gym_manager.fee.infrastructure.in.web.dto.FeeResponse;
 import com.raulmartin.gym_manager.member.domain.model.MemberStatus;
+import com.raulmartin.gym_manager.workout.infrastructure.in.web.dto.WorkoutResponse;
 
 public record MemberResponse(
         UUID id,
@@ -14,7 +15,8 @@ public record MemberResponse(
         String phone,
         LocalDate birthDate,
         FeeResponse fee,
-        MemberStatus memberStatus
+        MemberStatus memberStatus,
+        WorkoutResponse workout
 ) {
     
 }

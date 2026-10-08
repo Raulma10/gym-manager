@@ -36,6 +36,8 @@ public record CreateMemberRequest(
     LocalDate birthDate,
 
     @NotNull 
-    UUID feeId
+    UUID feeId,
+    
+    UUID workoutId
 ) {
 }

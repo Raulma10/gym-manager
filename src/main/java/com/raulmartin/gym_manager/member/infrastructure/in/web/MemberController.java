@@ -22,11 +22,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.raulmartin.gym_manager.fee.domain.model.Fee;
 import com.raulmartin.gym_manager.member.domain.model.Member;
 import com.raulmartin.gym_manager.member.domain.model.MemberStatus;
+import com.raulmartin.gym_manager.member.domain.port.in.AssignWorkoutToMemberUseCase;
 import com.raulmartin.gym_manager.member.domain.port.in.ChangeMemberStatusUseCase;
 import com.raulmartin.gym_manager.member.domain.port.in.CreateMemberUseCase;
 import com.raulmartin.gym_manager.member.domain.port.in.DeleteMemberUseCase;
 import com.raulmartin.gym_manager.member.domain.port.in.FindMemberByIdUseCase;
 import com.raulmartin.gym_manager.member.domain.port.in.ListMembersUseCase;
+import com.raulmartin.gym_manager.member.domain.port.in.RemoveWorkoutFromMemberUseCase;
 import com.raulmartin.gym_manager.member.domain.port.in.SearchMemberUseCase;
 import com.raulmartin.gym_manager.member.domain.port.in.UpdateMemberUseCase;
 import com.raulmartin.gym_manager.member.infrastructure.in.MemberMapper;
@@ -50,7 +52,8 @@ public class MemberController {
     private final FindMemberByIdUseCase findMemberByIdUseCase;
     private final ChangeMemberStatusUseCase changeMemberStatusUseCase;
     private final DeleteMemberUseCase deleteMemberUseCase;
-
+    private final AssignWorkoutToMemberUseCase assignWorkoutToMemberUseCase;
+    private final RemoveWorkoutFromMemberUseCase removeWorkoutFromMemberUseCase;
     @PostMapping 
     public ResponseEntity<MemberResponse> createMember(@Valid @RequestBody CreateMemberRequest createMemberRequest){
         Member member = createMemberUseCase.create(
@@ -59,7 +62,8 @@ public class MemberController {
             createMemberRequest.mail(),
             createMemberRequest.phone(),
             createMemberRequest.birthDate(),
-            createMemberRequest.feeId()
+            createMemberRequest.feeId(),
+            createMemberRequest.workoutId()
         );
 
         return ResponseEntity
@@ -137,6 +141,22 @@ public class MemberController {
     @PatchMapping("/{id}/status")
     public ResponseEntity<MemberResponse> changeMemberStatus(@PathVariable UUID id){
         Member member = changeMemberStatusUseCase.changeMemberStatus(id);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(memberMapper.toResponse(member));
+    }
+
+    @PatchMapping("/{memberId}/workout/{workoutId}")
+    public ResponseEntity<MemberResponse> assignWorkout(@PathVariable UUID memberId, @PathVariable UUID workoutId){
+        Member member = assignWorkoutToMemberUseCase.assignWorkout(memberId, workoutId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(memberMapper.toResponse(member));
+    }
+
+    @PatchMapping("/{memberId}/workout/{workoutId}")
+    public ResponseEntity<MemberResponse> removeWorkout(@PathVariable UUID memberId, @PathVariable UUID workoutId){
+        Member member = removeWorkoutFromMemberUseCase.removeWorkout(memberId);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(memberMapper.toResponse(member));
